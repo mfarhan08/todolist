@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -12,6 +13,7 @@ import (
 )
 
 func getAllTodo(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("got it")
 	todos := model.GetAllTodo()
 	js, _ := json.Marshal(todos)
 	w.Header().Set("Content-Type", "application/json")
@@ -19,6 +21,7 @@ func getAllTodo(w http.ResponseWriter, r *http.Request) {
 }
 
 func getTodo(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("got it")
 	id, _ := strconv.Atoi(mux.Vars(r)["id"])
 	todo := model.GetTodo(id)
 	js, _ := json.Marshal(todo)
@@ -27,6 +30,7 @@ func getTodo(w http.ResponseWriter, r *http.Request) {
 }
 
 func createTodo(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("got it")
 	type create_request struct {
 		Name string
 	}
@@ -39,6 +43,7 @@ func createTodo(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteTodo(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("got it")
 	id, _ := strconv.Atoi(mux.Vars(r)["id"])
 	model.DeleteTodo(id)
 	w.Write([]byte(`{"status": "Todo marked as done and deleted"}`))
